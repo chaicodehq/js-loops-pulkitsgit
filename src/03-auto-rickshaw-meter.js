@@ -33,4 +33,30 @@
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
   // Your code here
+  if (
+    typeof distance !== "number" ||
+    typeof waitingMinutes !== "number" ||
+    Number.isNaN(distance) ||
+    Number.isNaN(waitingMinutes) ||
+    distance <= 0 ||
+    waitingMinutes < 0
+  ) {
+    return -1;
+  }
+  let kilometers = 1;
+  let distanceFare = 0;
+  const roundedUpDistance = distance < 1 ? 1 : Math.ceil(distance);
+  while (kilometers <= roundedUpDistance) {
+    if (kilometers === 1) {
+      distanceFare += 30;
+    } else if (kilometers >= 2 && kilometers <= 5) {
+      distanceFare += 15;
+    } else {
+      distanceFare += 10;
+    }
+    kilometers++;
+  }
+  const waitingFare = Math.ceil(waitingMinutes / 2) * 5;
+  const totalFare = distanceFare + waitingFare;
+  return totalFare;
 }

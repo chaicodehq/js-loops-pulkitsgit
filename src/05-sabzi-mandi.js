@@ -31,4 +31,64 @@
  */
 export function sabziMandiBill(shoppingList, priceList) {
   // Your code here
+  if (
+    !Array.isArray(shoppingList) ||
+    typeof priceList !== "object" ||
+    priceList === null
+  ) {
+    return { items: [], totalBill: 0 };
+  }
+  const items = [];
+  let bill = 0;
+  for (const item of shoppingList) {
+    const itemName = item.name;
+    if (itemName in priceList && priceList[itemName] <= 80) {
+      items.push({
+        name: itemName,
+        qty: item.qty,
+        cost: priceList[itemName] * item.qty,
+      });
+      bill = bill + priceList[itemName] * item.qty;
+    }
+  }
+  return { items: items, totalBill: bill };
 }
+sabziMandiBill(
+  [
+    { name: "aloo", qty: 2 },
+    { name: "shimla mirch", qty: 1 },
+  ],
+  { aloo: 30, tamatar: 40, shimla_mirch: 90 },
+);
+
+//Second approach
+
+// const validItems = shoppingList.filter(item =>
+//   item.name in priceList &&
+//   priceList[item.name] <= 80
+// );
+
+// const items = validItems.map(item => {
+//   const cost = priceList[item.name] * item.qty;
+//   return { name: item.name, qty: item.qty, cost };
+// });
+
+// const totalBill = items.reduce((sum, item) => sum + item.cost, 0);
+
+// return { items, totalBill };
+
+//Third Approach
+// return shoppingList.reduce(
+//   (acc, item) => {
+//     if (
+//       item.name in priceList &&
+//       priceList[item.name] <= 80
+//     ) {
+//       const cost = priceList[item.name] * item.qty;
+//       acc.items.push({ name: item.name, qty: item.qty, cost });
+//       acc.totalBill += cost;
+//     }
+//     return acc;
+//   },
+//   { items: [], totalBill: 0 }
+// );

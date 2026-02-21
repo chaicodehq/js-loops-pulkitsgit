@@ -28,4 +28,22 @@
  */
 export function chaiTapriRevenue(customers) {
   // Your code here
+  if (
+    typeof customers === "number" &&
+    Number.isFinite(customers) &&
+    Number.isInteger(customers) &&
+    customers > 0
+  ) {
+    let revenue = 0;
+    const totalChai = customers;
+    for (let i = 1; i <= totalChai; i++) {
+      if (i % 3 === 0) {
+        revenue = revenue + 15;
+      } else {
+        revenue = revenue + 10;
+      }
+    }
+    return { totalChai: totalChai, totalRevenue: revenue };
+  }
+  return { totalChai: 0, totalRevenue: 0 };
 }

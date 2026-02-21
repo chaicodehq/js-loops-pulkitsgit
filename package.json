@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:win": "set NODE_OPTIONS=--experimental-vm-modules&& jest",
     "test:win:watch": "set NODE_OPTIONS=--experimental-vm-modules&& jest --watchAll"
   },
-  "keywords": ["javascript", "loops", "lab", "education"],
+  "keywords": [
+    "javascript",
+    "loops",
+    "lab",
+    "education"
+  ],
   "license": "MIT",
   "devDependencies": {
     "jest": "^29.7.0"
